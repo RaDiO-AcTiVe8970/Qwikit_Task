@@ -199,7 +199,7 @@ function Features() {
             data-theme="cupcake"
           >
             <div className="max-w-5xl py-12 content-center justify-center">
-              <h1 className="text-4xl text-center text-black font-bold">
+              <h1 className="text-4xl text-center text-white font-bold">
                 Our Products
               </h1><br/>
               <input
@@ -229,8 +229,8 @@ function Features() {
                   </figure>
                   <div className="card-body p-4">
                     <h2 className="card-title text-xl font-bold">{product.name}</h2>
-                    <p className="text-gray-700">{product.description}</p>
-                    <p className="text-gray-700">Price: ${product.price}</p>
+                    <p className="text-white">{product.description}</p>
+                    <p className="text-white">Price: ${product.price}</p>
                     <button
                       className="btn btn-primary mt-2"
                       onClick={() => handleProductClick(product)}

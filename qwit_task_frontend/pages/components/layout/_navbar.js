@@ -6,7 +6,6 @@ const _NavBar = () => {
   const dispatch = useDispatch();
 
   const handleRemoveProduct = (productId) => {
-    // Dispatch the removeProduct action with the productId
     dispatch(removeProduct({ id: productId }));
   };
 
@@ -54,9 +53,9 @@ const _NavBar = () => {
               </div>
               {cart.products.map((product) => (
                 <div key={product.id} className="mb-4">
-                  <p className="text-black">{product.name}</p>
-                  <p className="text-black">Price: ${product.price}</p>
-                  <p className="text-black">Quantity: {product.quantity}</p>
+                  <p className="text-white">{product.name}</p>
+                  <p className="text-white">Price: ${product.price}</p>
+                  <p className="text-white">Quantity: {product.quantity}</p>
                   <button
                     className="btn btn-danger"
                     onClick={() => handleRemoveProduct(product.id)}
