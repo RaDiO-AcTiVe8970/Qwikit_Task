@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   daisyui: {
-    theme: ["cupcake"],
+    theme: ["cupcake", "dark"],
   },
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',

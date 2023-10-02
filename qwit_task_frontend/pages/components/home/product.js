@@ -103,7 +103,7 @@ import { motion } from 'framer-motion';
 import { Element } from 'react-scroll';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '../Redux/cartRedux';
 
 function Features() {
@@ -112,9 +112,10 @@ function Features() {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false); // New state for the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
     // Listen for scroll events to trigger animations
@@ -126,7 +127,8 @@ function Features() {
   }, []);
 
   const handleClick = () => {
-    dispatch(addProduct({ ...product, quantity })); // Include quantity in the added product
+    dispatch(addProduct({ ...product, quantity }));
+    setQuantity(1); // Reset quantity to 1 after adding to cart
   };
 
   const handleModalOpen = () => {
@@ -138,14 +140,12 @@ function Features() {
   };
 
   const handleModalConfirm = () => {
-    // Handle any action when the modal is confirmed
-    // For example, you can add the product to the cart here
     dispatch(addProduct({ ...product, quantity }));
     setIsModalOpen(false);
+    setQuantity(1); // Reset quantity to 1 after adding to cart
   };
 
   const handleModalCancel = () => {
-    // Handle any action when the modal is canceled
     setIsModalOpen(false);
   };
 
@@ -159,12 +159,9 @@ function Features() {
   };
 
   const handleScroll = () => {
-    // Calculate the position of the Features section
     const productsSection = document.getElementById('abtdiv');
     if (productsSection) {
       const productsSectionTop = productsSection.getBoundingClientRect().top;
-
-      // Check if the Features section is in the viewport
       if (productsSectionTop < window.innerHeight * 0.75) {
         setIsVisible(true);
       }
@@ -198,53 +195,51 @@ function Features() {
         <Element name="featuresSection">
           <div
             id="abtdiv"
-            className="grid place-items-center w-full bg-base-100"
+            className="grid place-items-center w-full bg-base-100 p-6"
             data-theme="cupcake"
           >
-            <div className="max-w-5xl py-24 content-center justify-center">
+            <div className="max-w-5xl py-12 content-center justify-center">
               <h1 className="text-4xl text-center text-black font-bold">
                 Our Products
-              </h1>
-              <div className="grid mt-12 md:grid-cols-3 grid-cols-1 gap-8">
-                <div className="w-full md:w-1/4">
-                  <input
-                    type="text"
-                    placeholder="Search by product name"
-                    className="input input-bordered w-full"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                </div>
-                {filteredProducts.map((product, key) => (
-                  <motion.div
-                    key={key}
-                    className="card w-96 bg-base-100 shadow-xl"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={
-                      isVisible
-                        ? { opacity: 1, y: 0 }
-                        : { opacity: 0, y: 20 }
-                    }
-                    transition={{ duration: 0.5, delay: key * 0.3 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <figure>
-                      <img src={product.image} alt={product.name} />
-                    </figure>
-                    <div className="card-body">
-                      <h2 className="card-title">{product.name}</h2>
-                      <p>{product.description}</p>
-                      <p>Price: ${product.price}</p>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() => handleProductClick(product)}
-                      >
-                        Learn More!
-                      </button>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+              </h1><br/>
+              <input
+                type="text"
+                placeholder="Search by product name"
+                className="input input-bordered w-full p-2"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <div className="grid mt-8 md:grid-cols-3 grid-cols-1 gap-4">
+              {filteredProducts.map((product, key) => (
+                <motion.div
+                  key={key}
+                  className="card bg-base-100 shadow-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={
+                    isVisible
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: 20 }
+                  }
+                  transition={{ duration: 0.5, delay: key * 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <figure>
+                    <img src={product.image} alt={product.name} />
+                  </figure>
+                  <div className="card-body p-4">
+                    <h2 className="card-title text-xl font-bold">{product.name}</h2>
+                    <p className="text-gray-700">{product.description}</p>
+                    <p className="text-gray-700">Price: ${product.price}</p>
+                    <button
+                      className="btn btn-primary mt-2"
+                      onClick={() => handleProductClick(product)}
+                    >
+                      Learn More!
+                    </button>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </Element>
@@ -256,7 +251,6 @@ function Features() {
           <div className="modal modal-open">
             <div className="modal-box">
               <form method="dialog">
-                {/* if there is a button in form, it will close the modal */}
                 <button
                   className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                   onClick={handleModalClose}
@@ -302,3 +296,5 @@ function Features() {
 }
 
 export default Features;
+
+

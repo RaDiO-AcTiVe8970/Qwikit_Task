@@ -7,11 +7,11 @@ import { ProductEntity } from './app.entity';
 @Module({
   imports: [TypeOrmModule.forRoot(
     { type: 'postgres',
-    host: 'localhost',
-    port: 5432,
+    host: 'containers-us-west-110.railway.app',
+    port: 6397,
     username: 'postgres',
-    password: 'MoHiT8970', //Change to your Password
-    database: 'qwit_task',
+    password: 'IXERQvSyE1AVUlSwZ4h1', //Change to your Password
+    database: 'railway',
     autoLoadEntities: true,
     synchronize: true,
     }), TypeOrmModule.forFeature([ProductEntity])],

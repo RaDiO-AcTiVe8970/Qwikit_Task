@@ -7,8 +7,6 @@ export default function _Header() {
     {/* Working */}
     {/* <script src="https://cdn.tailwindcss.com"></script>  */}
       <_NavBar/>
-
-
     </>
   )
 

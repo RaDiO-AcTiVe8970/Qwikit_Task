@@ -12,9 +12,9 @@ export default function _Footer(props) {
   />}
 
           <p>
-            Business Process Automation Ltd.
+            Opekkha Store LTD.
             <br />
-            Providing reliable Software solution since 2023
+            Providing products since 2023
           </p>
         </div>
         <div>
