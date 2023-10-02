@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { removeProduct } from '../Redux/cartRedux';
+import { removeProduct } from '../../Redux/cartRedux';
 import { useEffect } from "react";
-import { resetCart } from "../Redux/cartRedux";
+import { resetCart } from "../../Redux/cartRedux";
 
 
 const _NavBar = () => {

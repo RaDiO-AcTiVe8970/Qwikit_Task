@@ -4,7 +4,7 @@ import { Element } from 'react-scroll';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct } from '../Redux/cartRedux';
+import { addProduct } from '../../Redux/cartRedux';
 
 function Features() {
   const [isVisible, setIsVisible] = useState(false);
@@ -72,6 +72,7 @@ function Features() {
     try {
       const response = await axios.get(
         'https://qwit-back.onrender.com/api/product/allproducts'
+        //'http://localhost:3000/api/product/allproducts''
       );
       setProducts(response.data);
     } catch (error) {
