@@ -4,12 +4,6 @@ export default function _Footer(props) {
     <>
       <footer className="footer p-10 bg-base-200 text-base-content" >
         <div>
-          {<Image
-            src={"/images/logo_c.png"}
-            alt="Preview"
-            width={250}
-            height={200}
-  />}
 
           <p>
             Opekkha Store LTD.

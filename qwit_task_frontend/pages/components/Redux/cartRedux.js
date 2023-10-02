@@ -41,12 +41,20 @@ const cartSlice = createSlice({
 
       if (indexToRemove !== -1) {
         const removedProduct = state.products.splice(indexToRemove, 1)[0];
-        state.quantity -= removedProduct.quantity;
-        state.total -= removedProduct.price * removedProduct.quantity;
+        if (state.quantity > 0) {
+          state.quantity -= removedProduct.quantity;
+          state.total -= removedProduct.price * removedProduct.quantity;
+        }
       }
+    },
+    resetCart: (state) => {
+      state.products = [];
+      state.quantity = 0;
+      state.total = 0;
     }
   }
 });
 
-export const { addProduct, removeProduct } = cartSlice.actions;
+export const { addProduct, removeProduct, resetCart } = cartSlice.actions;
 export default cartSlice.reducer;
+
